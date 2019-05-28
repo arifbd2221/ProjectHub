@@ -1,7 +1,6 @@
 absl-py==0.7.1
 aioredis==1.2.0
 alabaster==0.7.12
-apturl==0.5.2
 asgiref==2.3.2
 asn1crypto==0.24.0
 astor==0.7.1
