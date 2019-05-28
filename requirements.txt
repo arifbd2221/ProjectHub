@@ -20,7 +20,6 @@ certifi==2019.3.9
 channels==2.1.7
 channels-redis==2.3.3
 chardet==3.0.4
-command-not-found==0.3
 constantly==15.1.0
 cryptography==2.1.4
 cupshelpers==1.0
