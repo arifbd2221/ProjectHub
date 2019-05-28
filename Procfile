@@ -1,1 +1,1 @@
-web: gunicorn ProjectHub.wsgi
+web: gunicorn django_project.wsgi
