@@ -1,3 +1,4 @@
+import django_heroku
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -143,7 +144,7 @@ EMAIL_HOST_PASSWORD = 'a1596321' #os.environ.get('a1596321')
 STRIPE_SECRET_KEY = 'sk_test_FL0bVqgTSa2tvCbgrjHSYJjp'
 STRIPE_PUBLISHABLE_KEY = 'pk_test_SvzbFA8azgZt5By6Osvyrq0Z'
 
-
+django_heroku.settings(locals())
 
 '''BKASH_APP_KEY = // bkash app key
 BKASH_APP_SECRET = // bkash app secret
