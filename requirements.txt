@@ -15,7 +15,6 @@ beautifulsoup4==4.7.1
 bleach==2.1.2
 blinker==1.4
 braintree==3.51.0
-Brlapi==0.6.6
 bs4==0.0.1
 certifi==2019.3.9
 channels==2.1.7
