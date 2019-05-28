@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+
+
+    {% if title %}
+        <title>Project Hub - {{ title }}</title>
+    {% else %}
+        <title>Project Hub</title>
+    {% endif %}
+</head>
+<body>
+
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Project Hub</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
+              <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+            </div>
+
+            <div class="navbar-form col-xs-6 col-xs-push-4 col-sm-7 col-sm-push-5">
+            <form class="navbar-form" id="search" role="search" method="GET">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="query" placeholder="Search Posts">
+                  
+                  </div>
+                
+            </form>
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
+                <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                <a class="nav-item nav-link" href="{% url 'cart' %}">Cart</a>
+                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+              {% else %}
+                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+              {% endif %}
+            </div>
+
+            
+          </div>
+        </div>
+      </nav>
+    </header>
+
+
+
+
+      <table class="table table-bordered text-center" style="width:50%">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for p in cartdict %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{ p.title }}</td>
+            <td>{{ p.author.username }}</td> 
+            <td>{{ p.price }}</td>
+          </tr>
+  
+          {% endfor %}
+
+        </tbody>
+      </table>
+
+
+
+
+
+
+          <div class="alert alert-primary" role="alert" style="width:50%">
+            {{totalcost}}
+          </div>
+    <form action="{% url 'payment' totalcost %}" id="pay">
+        <button type="submit" class="btn btn-outline-secondary">Pay!</button>
+    </form>
+    </div>
+
+    
+<!-- 
+    <script>
+        //var $table = $('#table');
+        keys = Object.keys(localStorage), i = keys.length;
+        mydata = [];
+        var total = 0;
+        while ( i-- ) {
+            var dict = {}
+            dict = localStorage.getItem(keys[i])
+            
+            total = total + parseFloat(JSON.parse(dict)['price']);
+            mydata.push(JSON.parse(dict));
+        
+            }
+        
+            $(function () {
+                $('#table').bootstrapTable({
+                    data: mydata
+                });
+            });
+            document.getElementById("pay").action = "payment/"+total;
+            document.getElementById("totalcost").innerHTML = "Total Cost : "+total;
+            total=0;
+        </script> -->
+
+
+    </body>
+    </html>

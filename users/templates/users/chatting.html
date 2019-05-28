@@ -1,0 +1,64 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <link rel="stylesheet" type="text/css" href="{% static 'users/chat.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+<h3 class=" text-center">Messaging</h3>
+<div class="messaging">
+      <div class="inbox_msg">
+        <div class="inbox_people">
+          <div class="headind_srch">
+            <div class="recent_heading">
+              <h4>{{recp}}</h4>
+            </div>
+
+        <div class="inbox_msg">
+          <div class="msg_history">
+
+            {% for msg in allmsg %}
+            {% if msg.id == user.id %}
+            <div class="outgoing_msg">
+              <div class="sent_msg">
+                <p>{{msg}}</p>
+                <span class="time_date"> 11:01 AM    |    June 9</span> </div>
+            </div>
+            {% endif %}
+
+            {% if msg.id != user.id %}
+            <div class="incoming_msg">
+              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="received_msg">
+                <div class="received_withd_msg">
+                  <p>{{msg}}</p>
+                  <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+
+          </div>
+          <div class="type_msg">
+            <div class="input_msg_write">
+              <form action="{% url 'sendmessage' recp %}" method="POST">
+                  {% csrf_token %}
+              <input type="text" class="write_msg" name="msg" placeholder="Type a message" />
+              <button class="msg_send_btn" type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div></div>
+    </body>
+    </html>

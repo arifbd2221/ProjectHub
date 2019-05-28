@@ -1,0 +1,30 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+
+<table class="table">
+      
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Price</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for id, order in cartdict.values %}
+          <tr>
+            <td>{{order}}</td>
+            <td>{{order}}</td>
+            <td>{{order}}</td>
+            <td>{{order}}</td>
+          </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+
+
+
+      {% endblock content %}
