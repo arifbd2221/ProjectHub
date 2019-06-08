@@ -23,7 +23,7 @@ def register(request):
             user = form.save(commit=False)
             user.is_active = True
             user.save()
-            reverse_lazy('login')
+            return reverse_lazy('login')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
