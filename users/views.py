@@ -11,6 +11,7 @@ from .tokens import account_activation_token
 from django.contrib.auth import login, authenticate
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from django.urls import reverse_lazy
 from .models import Message
 from itertools import chain
 
@@ -20,24 +21,9 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False
+            user.is_active = True
             user.save()
-            current_site = get_current_site(request)
-            message = render_to_string('users/acc_active_email.html', {
-                'user':user, 'domain':current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
-            # Sending activation link in terminal
-            # user.email_user(subject, message)
-            mail_subject = 'Activate your blog account.'
-            to_email = form.cleaned_data.get('email')
-            email = EmailMessage(mail_subject, message, to=[to_email])
-            email.send()
-            # username = form.cleaned_data.get('username')
-            # messages.success(request, f'Your account has been created! You are now able to log in')
-            # return redirect('login')
-            return HttpResponse('Please confirm your email address to complete the registration.')
+            reverse_lazy('login')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
