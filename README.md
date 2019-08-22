@@ -8,4 +8,4 @@ User must provide their stripe credentials to make any checkout successful.
 
 This application is now live on heroku server
 
-          https://projectshub.herokuapp.com/
+https://projectshub.herokuapp.com/
