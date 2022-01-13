@@ -11,7 +11,7 @@ django-cart==1.0.4
 django-ckeditor==5.4.0
 django-classy-tags==0.8.0
 django-cleanup==2.1.0
-django-cms==3.5.3
+django-cms==3.5.4
 django-cors-headers==2.4.0
 django-crispy-forms==1.7.2
 django-extensions==2.1.4
